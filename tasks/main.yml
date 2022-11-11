@@ -1,0 +1,30 @@
+---
+- name: "Common | set os specific variables"
+  ansible.builtin.include_vars: "{{ item }}"
+  with_first_found:
+    - "os-{{ ansible_distribution }}.yml"
+    - "os-{{ ansible_distribution }}-{{ ansible_distribution_version }}.yml"
+    - "os-{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+    - "os-{{ ansible_os_family }}.yml"
+    - "os-default.yml"
+
+  tags:
+    - always
+
+- name: "Install packages"
+  ansible.builtin.include_tasks: packages-{{ ansible_os_family }}.yml
+  tags:
+    - postfix
+    - postfix:packages
+
+- name: "Configure postfix"
+  ansible.builtin.include_tasks: common-config.yml
+  tags:
+    - postfix
+    - postfix:config
+
+- name: "Set systemd service"
+  ansible.builtin.include_tasks: common-service.yml
+  tags:
+    - postfix
+    - postfix:service

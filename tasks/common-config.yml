@@ -1,0 +1,12 @@
+---
+- name: Configure global settings.
+  ansible.builtin.lineinfile:
+    dest: "{{ postfix_config_path }}/main.cf"
+    regexp: "^#?{{ config.option }}.+$"
+    line: "{{ config.option }} = {{ config.value }}"
+    state: "{{ config.state | default('present') }}"
+    mode: 0644
+  loop: "{{ postfix_conf_main }}"
+  loop_control:
+    loop_var: config
+  notify: restart postfix

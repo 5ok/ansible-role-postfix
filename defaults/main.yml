@@ -1,0 +1,10 @@
+---
+
+postfix_packages: "{{ __postfix_packages }}"
+
+postfix_service_name: "{{ __postfix_service_name }}"
+postfix_service_enabled: true
+postfix_service_state: started
+
+postfix_config_path: "{{ __postfix_config_path }}"
+postfix_conf_main: []

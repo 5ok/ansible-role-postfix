@@ -1,0 +1,9 @@
+---
+
+- name: "Install postfix packages"
+  ansible.builtin.dnf:
+    name: "{{ package.name }}"
+    state: "{{ package.state }}"
+  loop: "{{ postfix_packages }}"
+  loop_control:
+    loop_var: package

@@ -1,0 +1,23 @@
+---
+galaxy_info:
+  role_name: postfix
+  namespace: 5ok
+  description: "linux smtp service by postfix"
+  author: Peter Hudec
+  company: "5ko s.r.o."
+  license: "liwcense (BSD, MIT)"
+  min_ansible_version: 2.4
+  platforms:
+    - name: EL
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
+  galaxy_tags:
+    - system
+    - mail
+    - postfix

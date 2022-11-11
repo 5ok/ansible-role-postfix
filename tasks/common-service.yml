@@ -1,0 +1,6 @@
+---
+- name: "Ensure postfix started/stopped"
+  ansible.builtin.service:
+    name: "{{ postfix_service_name }}"
+    state: "{{ postfix_service_state }}"
+    enabled: "{{ postfix_service_enabled }}"
