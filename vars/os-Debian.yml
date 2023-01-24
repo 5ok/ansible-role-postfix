@@ -1,8 +1,7 @@
 ---
 
+__postfix_supported: true
 __postfix_packages:
   - { name: 'postfix', state: 'present' }
-
 __postfix_service_name: postfix
-
 __postfix_config_path: /etc/postfix

@@ -7,24 +7,38 @@
     - "os-{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
     - "os-{{ ansible_os_family }}.yml"
     - "os-default.yml"
-
   tags:
     - always
 
 - name: "Install packages"
-  ansible.builtin.include_tasks: packages-{{ ansible_os_family }}.yml
+  ansible.builtin.include_tasks:
+    file: packages-{{ ansible_os_family }}.yml
+    apply:
+      tags:
+        - postfix
+        - postfix:packages
+  when: postfix_supported
   tags:
-    - postfix
-    - postfix:packages
+    - always
 
 - name: "Configure postfix"
-  ansible.builtin.include_tasks: common-config.yml
+  ansible.builtin.include_tasks:
+    file: common-config.yml
+    apply:
+      tags:
+        - postfix
+        - postfix:config
+  when: postfix_supported
   tags:
-    - postfix
-    - postfix:config
+    - always
 
 - name: "Set systemd service"
-  ansible.builtin.include_tasks: common-service.yml
+  ansible.builtin.include_tasks:
+    file: common-service.yml
+    apply:
+      tags:
+        - postfix
+        - postfix:service
+  when: postfix_supported
   tags:
-    - postfix
-    - postfix:service
+    - always

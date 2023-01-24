@@ -1,5 +1,5 @@
 ---
-- name: restart postfix
+- name: restart postfix   # noqa name[casing]
   ansible.builtin.systemd:
     name: "{{ postfix_service_name }}"
     state: restarted

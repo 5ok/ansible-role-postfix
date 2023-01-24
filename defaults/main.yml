@@ -1,5 +1,7 @@
 ---
 
+postfix_supported: "{{ __postfix_supported }}"
+
 postfix_packages: "{{ __postfix_packages }}"
 
 postfix_service_name: "{{ __postfix_service_name }}"
